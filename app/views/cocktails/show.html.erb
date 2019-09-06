@@ -2,6 +2,12 @@
 
 <ul>
   <li>Name: <%= @cocktail.name %></li>
-  <li>Doses: <%= @cocktail.doses.each { |dose| dose.ingredients }%></li>
-  <li>Ingredients: <%= @cocktail.ingredients.each{ |ingredient| ingredient.name } %></li>
+  <li>Doses:
+    <% @cocktail.doses.each do |dose| %>
+      <%= dose.description %>
+      <%= dose.ingredient.name %>
+    <% end %>
+  </li>
 </ul>
+
+<%= link_to "Add a Dose", new_cocktail_dose_path(@cocktail) %>

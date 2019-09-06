@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     eval("@#{@model} = #{@model_class}.new(#{model_params})")
 
     if eval("@#{@model}.save")
-      go_home
+      eval("redirect_to @#{@model}")
     else
       render :new
     end
@@ -46,10 +46,11 @@ class ApplicationController < ActionController::Base
   end
 
   def model_params
-    eval("params.require(:#{@model}).permit(#{@model_class::ATTRIBUTES})")
+    attributes = eval("#{@model_class}::ATTRIBUTES")
+    eval("params.require(:#{@model}).permit(#{attributes})")
   end
 
   def go_home
-    redirect_to roots_path || eval("redirect_to #{@model}s_path")
+    redirect_to root_path || eval("redirect_to #{@model}s_path")
   end
 end

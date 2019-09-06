@@ -1,0 +1,6 @@
+<%= simple_form_for cocktail do |f| %>
+  <% Cocktail::ATTRIBUTES.each do |attribute| %>
+    <%= f.input attribute %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
